@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:massage_app/screens/registeratoin_screen.dart';
-import 'package:massage_app/screens/signin_screen.dart';
-import 'package:massage_app/widgets/button.dart';
+import 'package:massage_app/login/screens/registeratoin_screen.dart';
+import 'package:massage_app/login/screens/signin_screen.dart';
+import 'package:massage_app/login/screens/widgets/button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String screenRoute = 'welcome_screen';
@@ -35,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF202020),
+                    color: Color.fromARGB(255, 59, 57, 57),
                   ),
                 ),
               ],
@@ -50,7 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             MyButton(
               color: Color.fromARGB(255, 227, 86, 86),
-              title: 'register',
+              title: 'Register',
               onPressed: () {
                 Navigator.pushNamed(context, RegistrationScreen.screenRoute);
               },

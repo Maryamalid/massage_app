@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:massage_app/screens/chat_screen.dart';
-import 'package:massage_app/widgets/button.dart';
+import 'package:massage_app/massegs/screens/chat_screen.dart';
+import 'package:massage_app/login/screens/widgets/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  static const String screenRoute = 'registration_screen';
+class SignInScreen extends StatefulWidget {
+  static const String screenRoute = 'signin_screen';
 
-  const RegistrationScreen({super.key});
+  const SignInScreen({super.key});
 
   @override
-  _RegistrationScreenState createState() => _RegistrationScreenState();
+  _SignInScreenState createState() => _SignInScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
@@ -79,7 +79,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   labelStyle: TextStyle(
                     color: Color.fromARGB(255, 96, 139, 139),
-                    fontWeight: FontWeight.bold,
+                    // fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -133,14 +133,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   labelStyle: TextStyle(
                     color: Color.fromARGB(255, 96, 139, 139),
-                    fontWeight: FontWeight.bold,
+                    // fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               SizedBox(height: 10),
               MyButton(
                 color: Color.fromARGB(255, 227, 86, 86),
-                title: 'Register',
+                title: 'Sign in',
                 onPressed: () async {
                   setState(() {
                     showSpinner = true;
@@ -149,13 +149,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     final user = await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
                     if (user != null) {
+                      print("info ${user.user?.email}");
                       Navigator.pushNamed(context, ChatScreen.screenRoute);
-                      setState(() {
-                        showSpinner = false;
-                      });
                     }
-                  } catch (e) {
-                    print(e);
+                  } catch (e, s) {
+                    print("erroo $e $s");
                   }
                 },
               )

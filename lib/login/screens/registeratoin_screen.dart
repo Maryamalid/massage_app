@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:massage_app/screens/chat_screen.dart';
-import 'package:massage_app/widgets/button.dart';
+import 'package:massage_app/massegs/screens/chat_screen.dart';
+import 'package:massage_app/login/screens/widgets/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class SignInScreen extends StatefulWidget {
-  static const String screenRoute = 'signin_screen';
+class RegistrationScreen extends StatefulWidget {
+  static const String screenRoute = 'registration_screen';
 
-  const SignInScreen({super.key});
+  const RegistrationScreen({super.key});
 
   @override
-  _SignInScreenState createState() => _SignInScreenState();
+  _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
@@ -140,7 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
               SizedBox(height: 10),
               MyButton(
                 color: Color.fromARGB(255, 227, 86, 86),
-                title: 'Sign in',
+                title: 'Register',
                 onPressed: () async {
                   setState(() {
                     showSpinner = true;
@@ -149,11 +149,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     final user = await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
                     if (user != null) {
-                      print("info ${user.user?.email}");
                       Navigator.pushNamed(context, ChatScreen.screenRoute);
+                      setState(() {
+                        showSpinner = false;
+                      });
                     }
-                  } catch (e, s) {
-                    print("erroo $e $s");
+                  } catch (e) {
+                    print(e);
                   }
                 },
               )
